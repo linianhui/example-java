@@ -1,10 +1,8 @@
 package example;
 
 import java.net.URLClassLoader;
-import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import sun.misc.Launcher;
 
 class ClassLoaderTest {
 
@@ -18,25 +16,12 @@ class ClassLoaderTest {
     Assertions.assertEquals(
         "sun.misc.Launcher$AppClassLoader", appClassLoader.getClass().getName()
     );
-    Assertions.assertTrue(
-        Arrays.stream(appClassLoader.getURLs())
-            .anyMatch(x -> x.toString().contains("junit"))
-    );
 
     Assertions.assertEquals(
         "sun.misc.Launcher$ExtClassLoader", extClassLoader.getClass().getName()
     );
-    Assertions.assertTrue(
-        Arrays.stream(extClassLoader.getURLs())
-            .allMatch(x -> x.toString().contains("/ext/") || x.toString().contains("/Ext"))
-    );
 
     Assertions.assertNull(bootstrapClassLoader);
-    Assertions.assertTrue(
-        Arrays.stream(Launcher.getBootstrapClassPath().getURLs())
-            .allMatch(x -> x.toString().contains("/jre/lib/")
-                || x.toString().contains("/jre/classes"))
-    );
 
     Assertions.assertSame(
         appClassLoader.loadClass("java.lang.String"),
