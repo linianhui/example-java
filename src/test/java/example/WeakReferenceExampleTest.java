@@ -13,6 +13,7 @@ public class WeakReferenceExampleTest {
 
         System.gc();
 
+        //在除了weakReference之外，没有引用时，gc就会立即回收。
         Assertions.assertNull(example.getWeakReferenceField());
     }
 
