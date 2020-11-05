@@ -1,6 +1,7 @@
-package example;
+package example.juc.sync;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import example.Action;
+import example.juc.sync.AtomicIntegerSynchronized;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

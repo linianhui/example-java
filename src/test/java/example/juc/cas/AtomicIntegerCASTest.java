@@ -1,5 +1,7 @@
-package example;
+package example.juc.cas;
 
+import example.Action;
+import example.juc.cas.AtomicIntegerCAS;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

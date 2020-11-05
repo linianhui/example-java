@@ -1,4 +1,4 @@
-package example;
+package example.juc.sync;
 
 public class AtomicIntegerSynchronized {
   private int count;

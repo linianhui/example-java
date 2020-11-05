@@ -1,5 +1,6 @@
-package example;
+package example.juc.cas;
 
+import example.UnsafeUtil;
 import sun.misc.Unsafe;
 
 public class AtomicIntegerCAS {
