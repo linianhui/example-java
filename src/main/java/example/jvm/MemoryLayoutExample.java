@@ -40,4 +40,7 @@ public class MemoryLayoutExample implements Comparable<MemoryLayoutExample> {
 
     // JNI java native interface, 调用本地方法，内存分配在本地方法栈中。
     public native void someNativeMethodName();
+
+    // Direct Memory直接内存区并不是JVM管理的一部分
+    // 1.4引入NIO后。
 }
