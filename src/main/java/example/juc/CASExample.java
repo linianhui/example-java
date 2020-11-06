@@ -1,8 +1,6 @@
 package example.juc;
 
-import example.UnsafeUtil;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicStampedReference;
+import example.util.UnsafeUtil;
 import sun.misc.Unsafe;
 
 public class CASExample {
