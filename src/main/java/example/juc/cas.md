@@ -12,9 +12,9 @@
 
 CAS是Compare And Swap的缩写，中文含义是比较和交换。CAS定义了三个值：
 
-*. V : 待更新的变量Var
-*. E : 预期的旧值Expected Value
-*. N : 新值New
+* V : 待更新的变量Var
+* E : 预期的旧值Expected Value
+* N : 新值New
 
 执行过程的伪代码如下：
 
