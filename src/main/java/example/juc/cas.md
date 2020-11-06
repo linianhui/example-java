@@ -1,4 +1,14 @@
-# CAS(Compare And Swap) 概念和原理
+[1 CAS(Compare And Swap) 概念和原理](#1-cascompare-and-swap-概念和原理)
+- [1 CAS(Compare And Swap) 概念和原理](#1-cascompare-and-swap-概念和原理)
+- [2 Java中的CAS](#2-java中的cas)
+- [3 Java中依赖Unsafe的CAS实现的一些原子操作类](#3-java中依赖unsafe的cas实现的一些原子操作类)
+- [4 CAS的三大问题](#4-cas的三大问题)
+  - [4.1 ABA问题](#41-aba问题)
+  - [4.2 循环导致CPU消耗过多](#42-循环导致cpu消耗过多)
+  - [4.3 只能保证一个共享变量的原子操作](#43-只能保证一个共享变量的原子操作)
+- [5 参考资料](#5-参考资料)
+
+# 1 CAS(Compare And Swap) 概念和原理
 
 CAS是Compare And Swap的缩写，中文含义是比较和交换。CAS定义了三个值：
 
@@ -18,7 +28,7 @@ if(V==E){
 
 
 
-# Java中的CAS
+# 2 Java中的CAS
 
 Java中提供了Unsafe类来提供CAS操作，目前有如下三个方法。
 
@@ -38,7 +48,7 @@ public final native boolean compareAndSwapLong(Object o, long offset,long expect
 这三个方法不会阻塞线程，然后调用方可以根据返回值决定是否重试或者放弃修改。
 
 
-# Java中依赖Unsafe的CAS实现的一些原子操作类
+# 3 Java中依赖Unsafe的CAS实现的一些原子操作类
 
 一个示例[CASExample.java](CASExample.java)。
 
@@ -46,9 +56,9 @@ Java中依赖Unsafe的CAS实现的一些原子操作类位于[java.util.concurre
 
 ![java.util.concurrent.atomic](atomic-package.png)
 
-# CAS的三大问题
+# 4 CAS的三大问题
 
-## ABA问题
+## 4.1 ABA问题
 
 ABA指的是V的值原来是A，变成了B，后来又更新为了A。这时JDK1.5引入了一个[AtomicStampedReference](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicStampedReference.html)
 来解决ABA的问题。原理是增加一个`Pair<T>`类型来持有引用和一个附加的标记`stamp`充当版本号。
@@ -84,20 +94,20 @@ public boolean compareAndSet(V   expectedReference,
 当然有时候我们并不关心是不是ABA，而是关心V是否被改动了，即使是先变成了B后又变成了A，也是可以的。所以这时候可以使用[AtomicMarkableReference<T>](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicMarkableReference.html)。它和AtomicStampedReference的差异在于Pair的字段不是int，而是boolean了，修改了就是true。
 
 
-## 循环导致CPU消耗过多
+## 4.2 循环导致CPU消耗过多
 
 自旋锁通常采用CAS，如果自旋时间过长仍然不成功，会占用大量的CPU资源。
 
 解决办法时让JVM支持处理器提供的`pause`指令 : 失败时睡眠一会接着重试。
 
-## 只能保证一个共享变量的原子操作
+## 4.3 只能保证一个共享变量的原子操作
 
 两种解决方案：
 1. 使用JDK 1.5提供的`AtomicReference`类保证对象之间的原子性，把多个变量放到一个对象里面进行CAS操作；
 2. 使用锁。锁内的临界区代码可以保证只有当前线程能操作。
 
 
-# 参考资料
+# 5 参考资料
 
 1. 深入浅出Java多线程-CAS与原子操作: <http://concurrent.redspider.group/article/02/10.html>
 2. java.util.concurrent.atomic : <https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/package-summary.html>
