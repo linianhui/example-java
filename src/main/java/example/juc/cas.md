@@ -1,4 +1,3 @@
-[1 CAS(Compare And Swap) 概念和原理](#1-cascompare-and-swap-概念和原理)
 - [1 CAS(Compare And Swap) 概念和原理](#1-cascompare-and-swap-概念和原理)
 - [2 Java中的CAS](#2-java中的cas)
 - [3 Java中依赖Unsafe的CAS实现的一些原子操作类](#3-java中依赖unsafe的cas实现的一些原子操作类)
