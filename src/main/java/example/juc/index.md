@@ -6,16 +6,13 @@
 
 # volatile 关键字
 
-# CAS(compare and swap)
+# [CAS(compare and swap)](cas.md)
 
-# AQS(AbstractQueuedSynchronizer)
+# [AQS(AbstractQueuedSynchronizer)](aqs.md)
 
-# synchronized 关键字
+# [synchronized 关键字](synchronized.md)
 
-# LookSupport(Unsafe)
+# [LookSupport](looksupport.md)
 
-参考资料
-
-1. 1
-1. <https://github.com/RedSpider1/concurrent>
+# [Unsafe](unsafe.md)
 
