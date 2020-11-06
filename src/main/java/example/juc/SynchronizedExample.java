@@ -1,6 +1,6 @@
-package example.juc.sync;
+package example.juc;
 
-public class AtomicIntegerSynchronized {
+public class SynchronizedExample {
   private int count;
   private static int countStatic;
 
@@ -19,7 +19,7 @@ public class AtomicIntegerSynchronized {
   }
 
   public int incrementAndGetSynchronizedClass() {
-    synchronized (AtomicIntegerSynchronized.class) {
+    synchronized (SynchronizedExample.class) {
       return ++countStatic;
     }
   }

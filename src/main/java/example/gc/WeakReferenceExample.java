@@ -1,4 +1,4 @@
-package example.jvm.gc.ref;
+package example.gc;
 
 import java.lang.ref.WeakReference;
 

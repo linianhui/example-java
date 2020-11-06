@@ -1,4 +1,4 @@
-package example.jvm.gc.ref;
+package example.gc;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

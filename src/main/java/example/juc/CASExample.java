@@ -1,9 +1,9 @@
-package example.juc.cas;
+package example.juc;
 
 import example.UnsafeUtil;
 import sun.misc.Unsafe;
 
-public class AtomicIntegerCAS {
+public class CASExample {
   private static Unsafe unsafe;
 
   // value字段的偏移位置。
@@ -13,7 +13,7 @@ public class AtomicIntegerCAS {
     try {
       unsafe = UnsafeUtil.getUnsafe();
       valueFieldOffset = unsafe.objectFieldOffset(
-          AtomicIntegerCAS.class.getDeclaredField("value")
+          CASExample.class.getDeclaredField("value")
       );
     } catch (Exception e) {
       e.printStackTrace();
