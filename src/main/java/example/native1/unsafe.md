@@ -123,6 +123,8 @@ public final int getAndSetInt(Object o, long offset, int newValue) {
 }
 ```
 
+以上读写部分等同于C#的[System.Threading.Interlocked](https://docs.microsoft.com/en-us/dotnet/api/system.threading.interlocked)。
+
 ## 3.6 类加载
 
 。。。待续
@@ -140,13 +142,15 @@ public native void fullFence();
 
 ## 3.8 线程调度
 
+这部分方法类似于C#的[System.Threading.Monitor](https://docs.microsoft.com/en-us/dotnet/api/system.threading.monitor)。
+
 ```java
 // 挂起线程
 public native void park(boolean isAbsolute, long time);
 // 唤醒线程
 public native void unpark(Object thread);
 
-// synchronized的底层是下辖基于次，不过目前以及标记为弃用了。
+// synchronized的底层实现基于此，不过目前以及标记为弃用了。
 @Deprecated
 public native void monitorEnter(Object o);
 @Deprecated
