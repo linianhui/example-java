@@ -50,8 +50,8 @@ public native int arrayIndexScale(Class<?> arrayClass)
 一下方法可以直接读取和写入一个对象的字段，即使字段是私有的。当然也包含其他的基础类型`Byte`、`Char`、`Short`、`Float`、`Double`、`Long`、`Object`。
 
 ```java
-public native int getIntVolatile(Object o, long offset);
-public native void putIntVolatile(Object o, long offset, int x);
+public native int getInt(Object o, long offset);
+public native void putInt(Object o, long offset, int x);
 ```
 
 也可以直接使用脱离对象本身使用内存地址进行读取和写入。
@@ -147,12 +147,12 @@ public native boolean tryMonitorEnter(Object o);
 `pack`的参数`isAbsolute`为`true`是表示time是绝对时间，单位是`毫秒`。为`false`是表示为相对时间，单位是`纳秒`。比如如下是等价的。
 
 ```java
-// 相对时间，100毫米
+// TIMED_WAITING 相对时间，100毫秒
 unsafe.pack(false, 100*1000*1000));
-// 绝对时间，100毫米
+// TIMED_WAITING 绝对时间，100毫秒
 unsafe.pack(true, System.currentTimeMillis()+100));
 
-// 一致阻塞，直到调用unpack
+// WAITING 一致阻塞，直到调用unpack
 unsafe.pack(false, 0L));
 ```
 
