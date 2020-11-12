@@ -7,9 +7,15 @@
   - [4.3 运行线程](#43-运行线程)
     - [4.3.1 无返回值(Runnable接口)](#431-无返回值runnable接口)
     - [4.3.2 有返回值(Callable Future和FutureTask)](#432-有返回值callable-future和futuretask)
-  - [4.4 线程池](#44-线程池)
-    - [4.4.1 BlockingQueue](#441-blockingqueue)
-    - [4.4.2 RejectedExecutionHandler](#442-rejectedexecutionhandler)
+  - [4.4 Thread的常用方法](#44-thread的常用方法)
+  - [4.5 线程池](#45-线程池)
+    - [4.5.1 BlockingQueue](#451-blockingqueue)
+      - [4.5.1.1 ArrayBlockingQueue](#4511-arrayblockingqueue)
+      - [4.5.1.2 LinkedBlockingQueue](#4512-linkedblockingqueue)
+      - [4.5.1.3 DelayQueue](#4513-delayqueue)
+      - [4.5.1.4 PriorityBlockingQueue](#4514-priorityblockingqueue)
+      - [4.5.1.5 SynchronousQueue](#4515-synchronousqueue)
+    - [4.5.2 RejectedExecutionHandler](#452-rejectedexecutionhandler)
 - [参考资料](#参考资料)
 
 # 1 OS内核态进程
@@ -196,7 +202,53 @@ public interface Future<V> {
 }
 ```
 
-## 4.4 线程池
+## 4.4 Thread的常用方法
+
+```java
+// 开始执行
+public synchronized void start();
+
+// 出让CPU，让OS重新调度，当然也有可能又调度到了当前线程。
+public static native void yield();
+
+// 使当前线程睡眠指定的时间，不释放锁。
+public static native void sleep(long millis) throws InterruptedException;
+
+// 让当前线程处于等待状态，等待调用join的线程执行完毕后再继续，内部是通过Object.wait实现的
+public final void join() throws InterruptedException {
+    join(0);
+}
+
+public final synchronized void join(long millis)
+throws InterruptedException {
+    long base = System.currentTimeMillis();
+    long now = 0;
+
+    if (millis < 0) {
+        throw new IllegalArgumentException("timeout value is negative");
+    }
+
+    if (millis == 0) {
+        while (isAlive()) {
+            wait(0);
+        }
+    } else {
+        while (isAlive()) {
+            long delay = millis - now;
+            if (delay <= 0) {
+                break;
+            }
+            wait(delay);
+            now = System.currentTimeMillis() - base;
+        }
+    }
+}
+
+// 获取当前线程
+public static native Thread currentThread();
+```
+
+## 4.5 线程池
 
 通常来说我们不会直接new一个Thread来使用，而是通过线程池来管理维护一个合适的线程数量，这样可以减少线程创建以及维护的开销。在Java中的线程池的接口是Executor，ThreadPoolExecutor是这个接口的实现类。
 
@@ -212,17 +264,131 @@ public ThreadPoolExecutor(
 )
 ```
 
-### 4.4.1 BlockingQueue
+### 4.5.1 BlockingQueue
 
-保存待执行的Runnable对象的队列。常用的有如下几个：
+保存待执行的Runnable对象的队列（线程安全）。常用的方法有如下几个：
 
-1. LinkedBlockingQueue : 默认Integer.MAX_VALUE。
-2. ArrayBlockingQueue : 需指定数量。
-3. SynchronousQueue : 容量为0。
-4. DelayQueue : 延迟队列。
+```java
+public interface BlockingQueue<E> extends Queue<E>{
+  // 插入元素 
+  // 队列已满时 : 抛出异常IllegalStateException(“Queue full”)
+  boolean add(E e);
+  // 队列已满时 : 返回false
+  boolean offer(E e);
+  // 队列已满时 : 一直阻塞到可以插入
+  void put(E e) throws InterruptedException;
+  // 队列已满时 : 阻塞指定的时间
+  boolean offer(E e, long timeout, TimeUnit unit) throws InterruptedException;
+ 
+  // 移除元素
+  // 队列为空 : 抛出异常
+  E remove();
+  // 队列为空 : 返回null
+  E poll();
+  // 队列为空 : 一直阻塞
+  E take() throws InterruptedException;
+  // 队列为空 : 阻塞指定的时间
+  E poll(long timeout, TimeUnit unit)throws InterruptedException;
 
+  // 检查元素
+  // 抛异常
+  E element();
+  // 返回null
+  E peek();
+}
+```
 
-### 4.4.2 RejectedExecutionHandler
+常用的实现类有：
+
+#### 4.5.1.1 ArrayBlockingQueue
+
+数组实现的有界的固定大小的队列，默认时非空公平锁实现的。
+```java
+public class ArrayBlockingQueue<E> extends AbstractQueue<E>
+        implements BlockingQueue<E>, java.io.Serializable{
+  
+  public ArrayBlockingQueue(int capacity) {
+        this(capacity, false);
+  }
+
+  public ArrayBlockingQueue(int capacity, boolean fair) {
+      if (capacity <= 0)
+          throw new IllegalArgumentException();
+      this.items = new Object[capacity];
+      lock = new ReentrantLock(fair);
+      notEmpty = lock.newCondition();
+      notFull =  lock.newCondition();
+  }
+}
+```
+
+#### 4.5.1.2 LinkedBlockingQueue
+
+链表实现的有界的队列，默认队列的大小是Integer.MAX_VALUE。
+```java
+public class LinkedBlockingDeque<E> extends AbstractQueue<E>
+    implements BlockingDeque<E>, java.io.Serializable {
+  
+  public LinkedBlockingDeque() {
+      this(Integer.MAX_VALUE);
+  }
+
+  public LinkedBlockingDeque(int capacity) {
+      if (capacity <= 0) throw new IllegalArgumentException();
+      this.capacity = capacity;
+  }
+}
+```
+
+#### 4.5.1.3 DelayQueue
+
+内部是用PriorityQueued实现的无界队列，没有队列大小限制，插入元素不会阻塞，但是获取元素会被延迟。队列中的元素必须实现`Delayed`接口。
+
+```java
+public interface Delayed extends Comparable<Delayed> {
+    long getDelay(TimeUnit unit);
+}
+```
+
+```java
+public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
+    implements BlockingQueue<E> {
+
+private final transient ReentrantLock lock = new ReentrantLock();
+private final PriorityQueue<E> q = new PriorityQueue<E>();
+
+}
+```
+
+#### 4.5.1.4 PriorityBlockingQueue
+
+通过Comparator实现的具有优先级的无界队列。默认非公平锁。
+
+```java
+public class PriorityBlockingQueue<E> extends AbstractQueue<E>
+    implements BlockingQueue<E>, java.io.Serializable {
+
+  public PriorityBlockingQueue(int initialCapacity) {
+      this(initialCapacity, null);
+  }
+
+  public PriorityBlockingQueue(int initialCapacity,
+                                Comparator<? super E> comparator) {
+      if (initialCapacity < 1)
+          throw new IllegalArgumentException();
+      this.lock = new ReentrantLock();
+      this.notEmpty = lock.newCondition();
+      this.comparator = comparator;
+      this.queue = new Object[initialCapacity];
+  }
+}
+```
+
+#### 4.5.1.5 SynchronousQueue
+
+容量为0的队列。每个take必须等待一个put。
+
+### 4.5.2 RejectedExecutionHandler
 
 当线程数量大于最大线程数量时，会触发拒绝策略。jdk默认提供的四种策略如下：
 
