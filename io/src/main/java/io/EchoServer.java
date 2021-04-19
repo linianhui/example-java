@@ -8,13 +8,13 @@ import io.nio.NIOEchoServer;
 
 public class EchoServer {
     public static void main(String[] args) {
-        int port = 23456;
         String type = "bio";
+        int port = 23456;
         if (args.length >= 1) {
-            port = Integer.parseInt(args[0]);
+            type = args[0];
         }
         if (args.length >= 2) {
-            type = args[1];
+            port = Integer.parseInt(args[1]);
         }
 
         create(type, port).run();

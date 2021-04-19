@@ -12,7 +12,7 @@ abstract class AbstractTest {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                EchoServer.main(new String[]{String.valueOf(port), type});
+                EchoServer.main(new String[]{type, String.valueOf(port)});
             }
         });
         thread.start();
