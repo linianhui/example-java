@@ -2,7 +2,7 @@
 
 ## IO
 
-1. <https://linianhui.github.io/computer-networking-programming/io-multiplexing/>
+1. <https://linianhui.github.io/computer-networking-programming/>
 
 ## [JMM](example/src/main/java/example/jmm/index.md)
 
