@@ -3,6 +3,7 @@ package io;
 import io.bio.BIOEchoServer;
 import io.bio.BIOThreadEchoServer;
 import io.bio.BIOThreadPoolEchoServer;
+import io.nio.NIOEchoServer;
 
 public class EchoServer {
     public static void main(String[] args) {
@@ -29,6 +30,8 @@ public class EchoServer {
                 return new BIOThreadEchoServer(port);
             case "bio-thread-pool":
                 return new BIOThreadPoolEchoServer(port);
+            case "nio":
+                return new NIOEchoServer(port);
             default:
                 return null;
         }
