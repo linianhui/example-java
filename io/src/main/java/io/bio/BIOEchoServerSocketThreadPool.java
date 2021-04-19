@@ -9,8 +9,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import io.EchoServerSocketRunnable;
-
 public class BIOEchoServerSocketThreadPool extends EchoServerSocketRunnable {
 
     public BIOEchoServerSocketThreadPool(ServerSocket serverSocket) {

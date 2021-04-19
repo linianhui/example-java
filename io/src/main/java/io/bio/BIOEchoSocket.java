@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-import io.EchoSocketRunnable;
-
 public class BIOEchoSocket extends EchoSocketRunnable {
 
     public BIOEchoSocket(Socket socket) {

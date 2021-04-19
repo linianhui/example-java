@@ -12,13 +12,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class AppServerTest extends AbstractTest {
 
     @ParameterizedTest()
-    @ValueSource(strings = { "bio" ,"bio-thread","bio-thread-pool"})
+    @ValueSource(strings = {"bio", "bio-thread", "bio-thread-pool"})
     void test_server_is_ok(String type) throws IOException {
-        int port = start_server("bio");
+        int port = start_server(type);
 
-        String actual = writeAndRead(port, "abc\n");
+        String actual = writeAndRead(port, type + "\n");
 
-        Assertions.assertEquals("ABC\n", actual);
+        Assertions.assertEquals(type.toUpperCase() + "\n", actual);
     }
 
     private String writeAndRead(int port, String input) throws IOException {

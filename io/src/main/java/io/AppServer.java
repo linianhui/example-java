@@ -18,26 +18,20 @@ public class AppServer {
             type = args[1];
         }
 
-        final ServerSocket serverSocket = new ServerSocket(port);
-        System.out.printf(
-            "\nlisten on %s:%d waiting for client...",
-            serverSocket.getInetAddress().getHostAddress(),
-            serverSocket.getLocalPort()
-        );
-        create(type, serverSocket).run();
-        create(type, serverSocket).run();
+        create(type, port).run();
     }
 
-    private static EchoServerSocketRunnable create(
+    private static Runnable create(
         final String type,
-        final ServerSocket serverSocket) {
+        final int port
+    ) throws IOException {
         switch (type) {
             case "bio":
-                return new BIOEchoServerSocket(serverSocket);
+                return new BIOEchoServerSocket(new ServerSocket(port));
             case "bio-thread":
-                return new BIOEchoServerSocketThread(serverSocket);
+                return new BIOEchoServerSocketThread(new ServerSocket(port));
             case "bio-thread-pool":
-                return new BIOEchoServerSocketThreadPool(serverSocket);
+                return new BIOEchoServerSocketThreadPool(new ServerSocket(port));
             default:
                 return null;
         }

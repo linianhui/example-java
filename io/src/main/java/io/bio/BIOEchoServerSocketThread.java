@@ -5,8 +5,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-import io.EchoServerSocketRunnable;
-
 public class BIOEchoServerSocketThread extends EchoServerSocketRunnable {
 
     public BIOEchoServerSocketThread(ServerSocket serverSocket) {
