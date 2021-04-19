@@ -8,14 +8,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class BIOEchoServerSocketThreadPool extends EchoServerSocketRunnable {
+public class BIOThreadPoolEchoServer extends BIOEchoServer {
 
-    public BIOEchoServerSocketThreadPool(ServerSocket serverSocket) {
-        super(serverSocket);
+    public BIOThreadPoolEchoServer(int port) {
+        super(port);
     }
 
     @Override
-    public void runCore(ServerSocket serverSocket) throws IOException {
+    public void runCore(final ServerSocket serverSocket) throws IOException {
         ExecutorService executor = new ThreadPoolExecutor(
             2,
             8,
@@ -26,7 +26,7 @@ public class BIOEchoServerSocketThreadPool extends EchoServerSocketRunnable {
 
         while (true) {
             Socket socket = serverSocket.accept();
-            executor.submit(new BIOEchoSocket(socket));
+            executor.submit(new BIOEchoRunnable(socket));
         }
     }
 }

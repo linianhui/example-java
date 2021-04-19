@@ -1,14 +1,11 @@
 package io;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-
-import io.bio.BIOEchoServerSocket;
-import io.bio.BIOEchoServerSocketThread;
-import io.bio.BIOEchoServerSocketThreadPool;
+import io.bio.BIOEchoServer;
+import io.bio.BIOThreadEchoServer;
+import io.bio.BIOThreadPoolEchoServer;
 
 public class EchoServer {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         int port = 23456;
         String type = "bio";
         if (args.length >= 1) {
@@ -21,17 +18,17 @@ public class EchoServer {
         create(type, port).run();
     }
 
-    private static Runnable create(
-        final String type,
-        final int port
-    ) throws IOException {
+    private static EchoServerRunnable create(
+            final String type,
+            final int port
+    ) {
         switch (type) {
             case "bio":
-                return new BIOEchoServerSocket(new ServerSocket(port));
+                return new BIOEchoServer(port);
             case "bio-thread":
-                return new BIOEchoServerSocketThread(new ServerSocket(port));
+                return new BIOThreadEchoServer(port);
             case "bio-thread-pool":
-                return new BIOEchoServerSocketThreadPool(new ServerSocket(port));
+                return new BIOThreadPoolEchoServer(port);
             default:
                 return null;
         }

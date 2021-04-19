@@ -7,11 +7,11 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.charset.StandardCharsets;
 
-public abstract class EchoSocketRunnable implements Runnable {
+public class BIOEchoRunnable implements Runnable {
 
     private final Socket socket;
 
-    public EchoSocketRunnable(Socket socket) {
+    public BIOEchoRunnable(Socket socket) {
         this.socket = socket;
     }
 
@@ -20,20 +20,26 @@ public abstract class EchoSocketRunnable implements Runnable {
         try {
             SocketAddress clientAddress = socket.getRemoteSocketAddress();
             System.out.println("\naccept client " + clientAddress);
-            runCore(socket);
+            echo(socket);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    protected abstract void runCore(Socket socket) throws IOException;
+    public void echo(Socket socket) throws IOException {
+        int readSize = 0;
+        do {
+            readSize = readAndWrite(socket);
+        } while (readSize!=-1);
+        socket.close();
+    }
 
     protected int readAndWrite(Socket socket) throws IOException {
         final InputStream in = socket.getInputStream();
         final byte[] buf = new byte[256];
         long pid = Thread.currentThread().getId();
         int readSize = in.read(buf);
-        if (readSize == -1) {
+        if (readSize==-1) {
             System.out.printf("\npid=%d read form client : FIN\n", pid);
             return readSize;
         }

@@ -12,11 +12,7 @@ abstract class AbstractTest {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    EchoServer.main(new String[]{String.valueOf(port), type});
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                EchoServer.main(new String[]{String.valueOf(port), type});
             }
         });
         thread.start();
@@ -44,11 +40,11 @@ abstract class AbstractTest {
         }
     }
 
-    protected Socket connect(int port){
-        while (true){
+    protected Socket connect(int port) {
+        while (true) {
             try {
                 return connectCore(port);
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
         }
