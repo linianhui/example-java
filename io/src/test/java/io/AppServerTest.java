@@ -6,11 +6,14 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class AppServerTest extends AbstractTest {
-    @Test
-    void test_bio_server_is_ok() throws IOException {
+
+    @ParameterizedTest()
+    @ValueSource(strings = { "bio" })
+    void test_server_is_ok(String type) throws IOException {
         int port = start_server("bio");
 
         String actual = writeAndRead(port, "abc\n");
