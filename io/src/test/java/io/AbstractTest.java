@@ -6,27 +6,25 @@ import java.net.Socket;
 import java.util.Random;
 
 abstract class AbstractTest {
-    protected int start_server(String type) {
-        int port = getRandomUnusedPort();
-        System.out.printf("random port is %d\n", port);
+    protected Thread start_server(int port, String type) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    AppServer.main(new String[]{String.valueOf(port), type});
+                    EchoServer.main(new String[]{String.valueOf(port), type});
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
-        thread.start();
-        return port;
+        return thread;
     }
 
-    private int getRandomUnusedPort() {
+    public int getRandomUnusedPort() {
         int port = new Random().nextInt(10000) + 50000;
         while (true) {
             if (portIsUnused(port)) {
+                System.out.printf("random port is %d\n", port);
                 return port;
             } else {
                 port = new Random().nextInt(10000) + 50000;

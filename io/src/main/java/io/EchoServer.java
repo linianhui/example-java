@@ -7,7 +7,7 @@ import io.bio.BIOEchoServerSocket;
 import io.bio.BIOEchoServerSocketThread;
 import io.bio.BIOEchoServerSocketThreadPool;
 
-public class AppServer {
+public class EchoServer {
     public static void main(String[] args) throws IOException {
         int port = 23456;
         String type = "bio";
