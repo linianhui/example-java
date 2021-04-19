@@ -1,5 +1,9 @@
 # 参考资料
 
+## IO
+
+1. <https://linianhui.github.io/computer-networking-programming/io-multiplexing/>
+
 ## [JMM](example/src/main/java/example/jmm/index.md)
 
 1. Java Language Specification ：<https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html#jls-17.4>
