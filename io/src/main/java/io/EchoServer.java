@@ -9,7 +9,7 @@ import io.nio.NIOEchoServer;
 public class EchoServer {
     public static void main(String[] args) {
         String type = "bio";
-        int port = 23456;
+        int port = 12345;
         if (args.length >= 1) {
             type = args[0];
         }
