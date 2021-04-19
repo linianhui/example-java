@@ -14,8 +14,9 @@ public class AppServer {
         if (args.length==2) {
             type = args[1];
         }
-        HashMap<String, BIOServerSocket> map = new HashMap<>();
+        HashMap<String,ServerSocketRunnable > map = new HashMap<>();
         map.put("bio", new BIOServerSocket());
+        map.put("bio-thread", new BIOThreadServerSocket());
 
         final ServerSocket serverSocket = new ServerSocket(port);
         System.out.printf(
