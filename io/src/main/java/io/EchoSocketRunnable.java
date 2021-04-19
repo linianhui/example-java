@@ -34,7 +34,7 @@ public abstract class EchoSocketRunnable implements Runnable {
             System.out.printf("pid=%d read form client : FIN\n", pid);
             return readSize;
         }
-        String str = new String(buf, 0, readSize - 1, StandardCharsets.UTF_8);
+        String str = new String(buf, 0, readSize , StandardCharsets.UTF_8);
         System.out.printf("pid=%d read form client : %s", pid, str);
         String upperCase = str.toUpperCase();
 

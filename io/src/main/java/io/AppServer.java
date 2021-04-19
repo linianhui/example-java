@@ -10,10 +10,10 @@ public class AppServer {
     public static void main(String[] args) throws IOException {
         int port = 23456;
         String type = "bio";
-        if (args.length == 1) {
+        if (args.length >= 1) {
             port = Integer.parseInt(args[0]);
         }
-        if (args.length == 2) {
+        if (args.length >= 2) {
             type = args[1];
         }
 
