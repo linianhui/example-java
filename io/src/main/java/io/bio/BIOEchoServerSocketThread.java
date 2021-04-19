@@ -19,7 +19,6 @@ public class BIOEchoServerSocketThread extends EchoServerSocketRunnable {
             System.out.println("\naccept client " + clientAddress);
             Thread thread = new Thread(new BIOEchoSocket(socket));
             thread.start();
-            socket.close();
         }
     }
 }

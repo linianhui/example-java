@@ -12,8 +12,6 @@ public class BIOEchoSocket extends EchoSocketRunnable {
 
     @Override
     public void runCore(Socket socket) throws IOException {
-        SocketAddress clientAddress = socket.getRemoteSocketAddress();
-        System.out.println("\naccept client " + clientAddress);
         int readSize = 0;
         do {
             readSize = readAndWrite(socket);

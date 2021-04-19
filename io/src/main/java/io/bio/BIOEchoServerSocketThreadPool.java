@@ -17,19 +17,19 @@ public class BIOEchoServerSocketThreadPool extends EchoServerSocketRunnable {
 
     @Override
     public void runCore(ServerSocket serverSocket) throws IOException {
+        ExecutorService executor = new ThreadPoolExecutor(
+            2,
+            8,
+            10, TimeUnit.MINUTES,
+            new ArrayBlockingQueue<Runnable>(16),
+            new ThreadPoolExecutor.AbortPolicy()
+        );
+
         while (true) {
             Socket socket = serverSocket.accept();
             SocketAddress clientAddress = socket.getRemoteSocketAddress();
             System.out.println("\naccept client " + clientAddress);
-            ExecutorService executor = new ThreadPoolExecutor(
-                2,
-                8,
-                10, TimeUnit.MINUTES,
-                new ArrayBlockingQueue<Runnable>(16),
-                new ThreadPoolExecutor.AbortPolicy()
-            );
             executor.submit(new BIOEchoSocket(socket));
-            socket.close();
         }
     }
 }
