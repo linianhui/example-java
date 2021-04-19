@@ -6,11 +6,11 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public abstract class SocketEcho implements Runnable {
+public abstract class EchoSocketRunnable implements Runnable {
 
     private final Socket socket;
 
-    public SocketEcho(Socket socket) {
+    public EchoSocketRunnable(Socket socket) {
         this.socket = socket;
     }
 
@@ -25,12 +25,12 @@ public abstract class SocketEcho implements Runnable {
 
     protected abstract void runCore(Socket socket) throws IOException;
 
-    int readAndWrite(Socket socket) throws IOException {
+    protected int readAndWrite(Socket socket) throws IOException {
         final InputStream in = socket.getInputStream();
         final byte[] buf = new byte[256];
         long pid = Thread.currentThread().getId();
         int readSize = in.read(buf);
-        if (readSize==-1) {
+        if (readSize == -1) {
             System.out.printf("pid=%d read form client : FIN\n", pid);
             return readSize;
         }

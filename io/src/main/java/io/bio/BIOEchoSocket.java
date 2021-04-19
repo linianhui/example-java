@@ -1,12 +1,14 @@
-package io;
+package io.bio;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-public class BIOSocketEcho extends SocketEcho {
+import io.EchoSocketRunnable;
 
-    public BIOSocketEcho(Socket socket) {
+public class BIOEchoSocket extends EchoSocketRunnable {
+
+    public BIOEchoSocket(Socket socket) {
         super(socket);
     }
 
@@ -17,7 +19,7 @@ public class BIOSocketEcho extends SocketEcho {
         int readSize = 0;
         do {
             readSize = readAndWrite(socket);
-        } while (readSize!=-1);
+        } while (readSize != -1);
         socket.close();
     }
 }
