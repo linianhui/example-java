@@ -8,7 +8,7 @@ import java.util.Random;
 abstract class AbstractTest {
     protected int start_server(String type) {
         int port = getRandomUnusedPort();
-        System.out.printf("\nrandom port is %d", port);
+        System.out.printf("\n\nrandom port is %d", port);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

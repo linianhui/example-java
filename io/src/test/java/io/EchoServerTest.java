@@ -23,14 +23,14 @@ public class EchoServerTest extends AbstractTest {
     private String writeAndRead(int port, String input) throws IOException {
         Socket socket = connect(port);
 
-        System.out.printf("\npid=%d client write : ", Thread.currentThread().getId(), input);
+        System.out.printf("\npid=%d client write : %s", Thread.currentThread().getId(), input);
         byte[] writeBytes = input.getBytes(StandardCharsets.UTF_8);
         socket.getOutputStream().write(writeBytes);
 
         byte[] readBytes = new byte[writeBytes.length];
         socket.getInputStream().read(readBytes);
         String read = new String(readBytes);
-        System.out.printf("\npid=%d client read : ", Thread.currentThread().getId(), read);
+        System.out.printf("\npid=%d client read : %s", Thread.currentThread().getId(), read);
 
         return read;
     }

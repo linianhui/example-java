@@ -19,7 +19,7 @@ public class BIOEchoRunnable implements Runnable {
     public void run() {
         try {
             SocketAddress clientAddress = socket.getRemoteSocketAddress();
-            System.out.println("\naccept client " + clientAddress);
+            System.out.printf("\naccept client %s", clientAddress);
             echo(socket);
         } catch (IOException e) {
             e.printStackTrace();
