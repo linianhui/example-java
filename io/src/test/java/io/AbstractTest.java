@@ -23,7 +23,7 @@ abstract class AbstractTest {
         return port;
     }
 
-    public int getRandomUnusedPort() {
+    protected int getRandomUnusedPort() {
         int port = new Random().nextInt(10000) + 50000;
         while (true) {
             if (portIsUnused(port)) {
@@ -42,5 +42,19 @@ abstract class AbstractTest {
         } catch (IOException e) {
             return true;
         }
+    }
+
+    protected Socket connect(int port){
+        while (true){
+            try {
+                return connectCore(port);
+            }catch (Exception e){
+
+            }
+        }
+    }
+
+    private Socket connectCore(int port) throws IOException {
+        return new Socket(InetAddress.getLoopbackAddress(), port);
     }
 }

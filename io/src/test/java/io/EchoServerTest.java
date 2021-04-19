@@ -1,7 +1,6 @@
 package io;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
@@ -22,7 +21,7 @@ public class EchoServerTest extends AbstractTest {
     }
 
     private String writeAndRead(int port, String input) throws IOException {
-        Socket socket = new Socket(InetAddress.getLoopbackAddress(), port);
+        Socket socket = connect(port);
 
         System.out.printf("\npid=%d client write : ", Thread.currentThread().getId(), input);
         byte[] writeBytes = input.getBytes(StandardCharsets.UTF_8);
@@ -32,9 +31,8 @@ public class EchoServerTest extends AbstractTest {
         socket.getInputStream().read(readBytes);
         String read = new String(readBytes);
         System.out.printf("\npid=%d client read : ", Thread.currentThread().getId(), read);
-        
+
         return read;
     }
-
 
 }
