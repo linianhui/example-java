@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 
 import io.bio.BIOEchoServerSocket;
 import io.bio.BIOEchoServerSocketThread;
+import io.bio.BIOEchoServerSocketThreadPool;
 
 public class AppServer {
     public static void main(String[] args) throws IOException {
@@ -35,6 +36,8 @@ public class AppServer {
                 return new BIOEchoServerSocket(serverSocket);
             case "bio-thread":
                 return new BIOEchoServerSocketThread(serverSocket);
+            case "bio-thread-pool":
+                return new BIOEchoServerSocketThreadPool(serverSocket);
             default:
                 return null;
         }

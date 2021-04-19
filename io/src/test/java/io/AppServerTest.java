@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class AppServerTest extends AbstractTest {
 
     @ParameterizedTest()
-    @ValueSource(strings = { "bio" ,"bio-thread"})
+    @ValueSource(strings = { "bio" ,"bio-thread","bio-thread-pool"})
     void test_server_is_ok(String type) throws IOException {
         int port = start_server("bio");
 
