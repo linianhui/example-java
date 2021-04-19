@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class EchoServerTest extends AbstractTest {
 
     @ParameterizedTest()
-    @ValueSource(strings = {"bio", "bio-thread", "bio-thread-pool", "nio"})
+    @ValueSource(strings = {"bio", "bio-thread", "bio-thread-pool", "nio", "aio"})
     void test_server_is_ok(String type) throws IOException {
         int port = start_server(type);
 

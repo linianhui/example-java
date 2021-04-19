@@ -1,5 +1,6 @@
 package io;
 
+import io.aio.AIOEchoServer;
 import io.bio.BIOEchoServer;
 import io.bio.BIOThreadEchoServer;
 import io.bio.BIOThreadPoolEchoServer;
@@ -32,6 +33,8 @@ public class EchoServer {
                 return new BIOThreadPoolEchoServer(port);
             case "nio":
                 return new NIOEchoServer(port);
+            case "aio":
+                return new AIOEchoServer(port);
             default:
                 return null;
         }
