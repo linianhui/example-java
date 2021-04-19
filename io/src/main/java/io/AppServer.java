@@ -14,8 +14,8 @@ public class AppServer {
         if (args.length==2) {
             type = args[1];
         }
-        HashMap<String, Echo> map = new HashMap<>();
-        map.put("bio", new BIOEcho());
+        HashMap<String, BIOServerSocket> map = new HashMap<>();
+        map.put("bio", new BIOServerSocket());
 
         final ServerSocket serverSocket = new ServerSocket(port);
         System.out.printf(
@@ -23,6 +23,6 @@ public class AppServer {
                 serverSocket.getInetAddress().getHostAddress(),
                 serverSocket.getLocalPort()
         );
-        map.get(type).echo(serverSocket);
+        map.get(type).run(serverSocket);
     }
 }
