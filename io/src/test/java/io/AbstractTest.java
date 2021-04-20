@@ -8,7 +8,7 @@ import java.util.Random;
 abstract class AbstractTest {
     protected int start_server(String type) {
         int port = getRandomUnusedPort();
-        System.out.printf("\n\nrandom port is %d", port);
+        System.out.printf("\n\n%s server port is %d", type, port);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -43,7 +43,9 @@ abstract class AbstractTest {
     protected Socket connect(int port) {
         while (true) {
             try {
-                return connectCore(port);
+                final Socket socket = connectCore(port);
+                System.out.printf("\ntest client port is %d", socket.getLocalPort());
+                return socket;
             } catch (Exception e) {
 
             }
