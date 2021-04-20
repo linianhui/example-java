@@ -3,6 +3,7 @@ package network;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,14 +23,20 @@ public class EchoServerTest extends AbstractTest {
     void test_server_is_ok(String type) throws IOException {
         int port = start_server(type);
 
-        String actual = writeAndRead(port, type);
+        final Socket socket = connect(port);
 
-        Assertions.assertEquals(type.toUpperCase(), actual);
+        assertWriteAndRead(socket);
     }
 
-    private String writeAndRead(int port, String input) throws IOException {
-        Socket socket = connect(port);
+    private void assertWriteAndRead(Socket socket) throws IOException {
+        String inputString = UUID.randomUUID().toString();
 
+        String actual = writeAndRead(socket, inputString);
+
+        Assertions.assertEquals(inputString.toUpperCase(), actual);
+    }
+
+    private String writeAndRead(Socket socket, String input) throws IOException {
         System.out.printf("\npid=%d client write : %s", Thread.currentThread().getId(), input);
         byte[] writeBytes = input.getBytes(StandardCharsets.UTF_8);
         socket.getOutputStream().write(writeBytes);
