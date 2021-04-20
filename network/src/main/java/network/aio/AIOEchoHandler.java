@@ -6,6 +6,8 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.StandardCharsets;
 
+import network.util.LogUtil;
+
 public class AIOEchoHandler implements CompletionHandler<Integer, ByteBuffer> {
 
     private final AsynchronousSocketChannel channel;
@@ -36,6 +38,6 @@ public class AIOEchoHandler implements CompletionHandler<Integer, ByteBuffer> {
 
     @Override
     public void failed(Throwable exc, ByteBuffer buf) {
-
+        LogUtil.logCaller();
     }
 }
