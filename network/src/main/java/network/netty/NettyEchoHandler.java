@@ -15,6 +15,7 @@ public class NettyEchoHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        LogUtil.logCaller();
         ByteBuf buf = (ByteBuf) msg;
         long pid = Thread.currentThread().getId();
 
