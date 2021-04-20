@@ -6,11 +6,11 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.StandardCharsets;
 
-public class AIOReadCompleteHandler implements CompletionHandler<Integer, ByteBuffer> {
+public class AIOEchoHandler implements CompletionHandler<Integer, ByteBuffer> {
 
     private final AsynchronousSocketChannel channel;
 
-    public AIOReadCompleteHandler(AsynchronousSocketChannel channel) {
+    public AIOEchoHandler(AsynchronousSocketChannel channel) {
         this.channel = channel;
     }
 

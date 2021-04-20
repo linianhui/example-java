@@ -18,10 +18,10 @@ public class EchoServer {
             port = Integer.parseInt(args[1]);
         }
 
-        create(type, port).run();
+        create(type, port).start();
     }
 
-    private static EchoServerRunnable create(
+    private static EchoServerHandler create(
             final String type,
             final int port
     ) {

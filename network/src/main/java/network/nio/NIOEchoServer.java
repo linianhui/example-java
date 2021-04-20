@@ -13,17 +13,17 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 
-import network.EchoServerRunnable;
+import network.EchoServerHandler;
 
-public class NIOEchoServer extends EchoServerRunnable {
+public class NIOEchoServer extends EchoServerHandler {
 
     public NIOEchoServer(int port) {
         super(port);
     }
 
     @Override
-    protected void runCore(int port) throws IOException {
-        runCore(bind(port));
+    protected void startCore(int port) throws IOException {
+        startCore(bind(port));
     }
 
     private ServerSocketChannel bind(int port) throws IOException {
@@ -39,7 +39,7 @@ public class NIOEchoServer extends EchoServerRunnable {
         return serverSocketChannel;
     }
 
-    private void runCore(ServerSocketChannel serverSocketChannel) throws IOException {
+    private void startCore(ServerSocketChannel serverSocketChannel) throws IOException {
         final Selector selector = Selector.open();
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 

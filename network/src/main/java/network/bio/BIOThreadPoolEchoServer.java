@@ -15,7 +15,7 @@ public class BIOThreadPoolEchoServer extends BIOEchoServer {
     }
 
     @Override
-    public void runCore(final ServerSocket serverSocket) throws IOException {
+    public void startCore(final ServerSocket serverSocket) throws IOException {
         ExecutorService executor = new ThreadPoolExecutor(
             2,
             8,
@@ -26,7 +26,7 @@ public class BIOThreadPoolEchoServer extends BIOEchoServer {
 
         while (true) {
             Socket socket = serverSocket.accept();
-            executor.submit(new BIOEchoRunnable(socket));
+            executor.submit(new BIOEchoHandler(socket));
         }
     }
 }

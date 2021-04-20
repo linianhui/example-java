@@ -7,11 +7,11 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.charset.StandardCharsets;
 
-public class BIOEchoRunnable implements Runnable {
+public class BIOEchoHandler implements Runnable {
 
     private final Socket socket;
 
-    public BIOEchoRunnable(Socket socket) {
+    public BIOEchoHandler(Socket socket) {
         this.socket = socket;
     }
 

@@ -5,17 +5,17 @@ import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.util.concurrent.CountDownLatch;
 
-import network.EchoServerRunnable;
+import network.EchoServerHandler;
 
-public class AIOEchoServer extends EchoServerRunnable {
+public class AIOEchoServer extends EchoServerHandler {
 
     public AIOEchoServer(int port) {
         super(port);
     }
 
     @Override
-    protected void runCore(int port) throws IOException {
-        runCore(bind(port));
+    protected void startCore(int port) throws IOException {
+        startCore(bind(port));
     }
 
     private AsynchronousServerSocketChannel bind(int port) throws IOException {
@@ -30,10 +30,10 @@ public class AIOEchoServer extends EchoServerRunnable {
         return asynchronousServerSocketChannel;
     }
 
-    private void runCore(AsynchronousServerSocketChannel asynchronousServerSocketChannel) throws IOException {
+    private void startCore(AsynchronousServerSocketChannel asynchronousServerSocketChannel) throws IOException {
         try {
             CountDownLatch countDownLatch = new CountDownLatch(1);
-            asynchronousServerSocketChannel.accept(this, new AIOAcceptCompleteHandler());
+            asynchronousServerSocketChannel.accept(this, new AIOAcceptHandler());
             countDownLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();

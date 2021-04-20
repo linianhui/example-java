@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 
-public class AIOAcceptCompleteHandler implements CompletionHandler<AsynchronousSocketChannel, AIOEchoServer> {
+public class AIOAcceptHandler implements CompletionHandler<AsynchronousSocketChannel, AIOEchoServer> {
 
     @Override
     public void completed(AsynchronousSocketChannel channel, AIOEchoServer aioEchoServer) {
@@ -18,7 +18,7 @@ public class AIOAcceptCompleteHandler implements CompletionHandler<AsynchronousS
         }
 
         ByteBuffer buf = ByteBuffer.allocate(1024);
-        channel.read(buf, buf, new AIOReadCompleteHandler(channel));
+        channel.read(buf, buf, new AIOEchoHandler(channel));
     }
 
     @Override
