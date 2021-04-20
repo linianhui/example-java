@@ -4,6 +4,7 @@ import io.aio.AIOEchoServer;
 import io.bio.BIOEchoServer;
 import io.bio.BIOThreadEchoServer;
 import io.bio.BIOThreadPoolEchoServer;
+import io.netty.NettyEchoServer;
 import io.nio.NIOEchoServer;
 
 public class EchoServer {
@@ -35,6 +36,8 @@ public class EchoServer {
                 return new NIOEchoServer(port);
             case "aio":
                 return new AIOEchoServer(port);
+            case "netty":
+                return new NettyEchoServer(port);
             default:
                 return null;
         }
