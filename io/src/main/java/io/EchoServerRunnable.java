@@ -1,7 +1,5 @@
 package io;
 
-import java.io.IOException;
-
 public abstract class EchoServerRunnable implements Runnable {
     private final int port;
 
@@ -13,10 +11,10 @@ public abstract class EchoServerRunnable implements Runnable {
     public void run() {
         try {
             runCore(port);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    protected abstract void runCore(int port) throws IOException;
+    protected abstract void runCore(int port) throws Exception;
 }
