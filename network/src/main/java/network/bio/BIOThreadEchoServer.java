@@ -13,8 +13,11 @@ public class BIOThreadEchoServer extends BIOEchoServer {
     @Override
     public void startCore(final ServerSocket serverSocket) throws IOException {
         while (true) {
-            Socket socket = serverSocket.accept();
-            Thread thread = new Thread(new BIOEchoHandler(socket));
+            final Socket socket = serverSocket.accept();
+            final Thread thread = new Thread(
+                    new BIOEchoHandler(socket),
+                    "bio-thread-for-" + socket.getRemoteSocketAddress().toString()
+            );
             thread.start();
         }
     }
