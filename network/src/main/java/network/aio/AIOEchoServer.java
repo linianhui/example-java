@@ -23,9 +23,8 @@ public class AIOEchoServer extends EchoServerHandler {
         final InetSocketAddress socketAddress = new InetSocketAddress(port);
         asynchronousServerSocketChannel.bind(socketAddress);
         System.out.printf(
-                "\nlisten on %s:%d waiting for client...",
-                socketAddress.getAddress().getHostAddress(),
-                socketAddress.getPort()
+                "\nlisten on %s waiting for client...",
+                socketAddress
         );
         return asynchronousServerSocketChannel;
     }

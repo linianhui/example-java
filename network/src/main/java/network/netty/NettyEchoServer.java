@@ -29,6 +29,10 @@ public class NettyEchoServer extends EchoServerHandler {
                     .childHandler(new NettyAcceptHandler());
 
             ChannelFuture future = bootstrap.bind(port).sync();
+            System.out.printf(
+                    "\nlisten on %s waiting for client...",
+                    future.channel().localAddress()
+            );
             future.channel().closeFuture().sync();
         } finally {
             master.shutdownGracefully();

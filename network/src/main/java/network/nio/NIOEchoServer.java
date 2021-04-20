@@ -31,9 +31,8 @@ public class NIOEchoServer extends EchoServerHandler {
         final ServerSocket serverSocket = serverSocketChannel.socket();
         serverSocket.bind(new InetSocketAddress(port));
         System.out.printf(
-                "\nlisten on %s:%d waiting for client...",
-                serverSocket.getInetAddress().getHostAddress(),
-                serverSocket.getLocalPort()
+                "\nlisten on %s waiting for client...",
+                serverSocket.getLocalSocketAddress()
         );
         serverSocketChannel.configureBlocking(false);
         return serverSocketChannel;
