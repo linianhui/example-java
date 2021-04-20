@@ -15,9 +15,9 @@ public class NettyAcceptHandler extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) {
+        LogUtil.logCaller();
         ChannelPipeline channelPipeline = ch.pipeline();
         channelPipeline.addLast(new NettyEchoHandler());
-        System.out.printf("\naccept client %s", ch.remoteAddress());
     }
 
     @Override

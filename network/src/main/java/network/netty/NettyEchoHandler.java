@@ -54,12 +54,14 @@ public class NettyEchoHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         LogUtil.logCaller();
+        System.out.printf("\naccept client %s connected", ctx.channel().remoteAddress());
         super.channelActive(ctx);
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         LogUtil.logCaller();
+        System.out.printf("\nclose client %s connected", ctx.channel().remoteAddress());
         super.channelInactive(ctx);
     }
 
