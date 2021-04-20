@@ -1,4 +1,4 @@
-package io;
+package network;
 
 public abstract class EchoServerRunnable implements Runnable {
     private final int port;

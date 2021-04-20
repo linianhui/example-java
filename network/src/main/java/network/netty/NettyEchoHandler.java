@@ -1,4 +1,4 @@
-package io.netty;
+package network.netty;
 
 import java.nio.charset.StandardCharsets;
 

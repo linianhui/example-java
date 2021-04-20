@@ -1,10 +1,10 @@
-package io.bio;
+package network.bio;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import io.EchoServerRunnable;
+import network.EchoServerRunnable;
 
 public class BIOEchoServer extends EchoServerRunnable {
 

@@ -1,6 +1,6 @@
-package io.netty;
+package network.netty;
 
-import io.EchoServerRunnable;
+import network.EchoServerRunnable;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;

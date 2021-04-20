@@ -1,4 +1,4 @@
-package io.aio;
+package network.aio;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

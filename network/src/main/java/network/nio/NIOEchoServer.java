@@ -1,4 +1,4 @@
-package io.nio;
+package network.nio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 
-import io.EchoServerRunnable;
+import network.EchoServerRunnable;
 
 public class NIOEchoServer extends EchoServerRunnable {
 

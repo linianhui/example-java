@@ -1,11 +1,11 @@
-package io.aio;
+package network.aio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.util.concurrent.CountDownLatch;
 
-import io.EchoServerRunnable;
+import network.EchoServerRunnable;
 
 public class AIOEchoServer extends EchoServerRunnable {
 

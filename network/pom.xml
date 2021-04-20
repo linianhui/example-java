@@ -7,7 +7,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>io</artifactId>
+  <artifactId>network</artifactId>
 
   <dependencies>
     <dependency>
@@ -24,7 +24,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>io.EchoServer</mainClass>
+              <mainClass>network.EchoServer</mainClass>
             </manifest>
           </archive>
         </configuration>
