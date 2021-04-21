@@ -22,7 +22,7 @@ public class EchoServer {
     }
 
     public static void main(String[] args) {
-        System.out.printf("\nargs %s\n",args);
+        System.out.printf("\nargs [%s]\n", String.join(",", args));
         ServerModel model = ServerModel.BIO;
         int port = 12345;
         if (args.length >= 1) {
