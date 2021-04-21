@@ -6,14 +6,62 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 public class EchoServerTest extends AbstractTest {
 
-    @ParameterizedTest()
-    @EnumSource(value = ServerModel.class)
-    void test_server_is_ok(ServerModel model) throws IOException {
+    @Test
+    void test_bio_server_is_ok() throws IOException {
+        test_server(ServerModel.BIO);
+    }
+
+    @Test
+    void test_bio_thread_server_is_ok() throws IOException {
+        test_server(ServerModel.BIO_THREAD);
+    }
+
+    @Test
+    void test_bio_thread_pool_server_is_ok() throws IOException {
+        test_server(ServerModel.BIO_THREAD_POOL);
+    }
+
+    @Test
+    void test_nio_server_is_ok() throws IOException {
+        test_server(ServerModel.NIO);
+    }
+
+    @Test
+    void test_aio_server_is_ok() throws IOException {
+        test_server(ServerModel.AIO);
+    }
+
+    @Test
+    @Disabled
+    void test_netty_bio_server_is_ok() throws IOException {
+        test_server(ServerModel.NETTY_BIO);
+    }
+
+    @Test
+    void test_netty_nio_server_is_ok() throws IOException {
+        test_server(ServerModel.NETTY_NIO);
+    }
+
+    @Test
+    @EnabledOnOs(OS.LINUX)
+    void test_netty_epoll_server_is_ok() throws IOException {
+        test_server(ServerModel.NETTY_EPOLL);
+    }
+
+    @Test
+    @EnabledOnOs(OS.MAC)
+    void test_netty_kqueue_server_is_ok() throws IOException {
+        test_server(ServerModel.NETTY_KQUEUE);
+    }
+
+    void test_server(ServerModel model) throws IOException {
         int port = startServer(model);
 
         final Socket socket = connect(port);
