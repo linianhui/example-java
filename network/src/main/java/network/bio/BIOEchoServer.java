@@ -17,9 +17,10 @@ public class BIOEchoServer extends EchoServerHandler {
     protected void startCore(int port) throws IOException {
         LogUtil.logCaller();
         final ServerSocket serverSocket = new ServerSocket(port);
+        serverSocket.setReuseAddress(true);
         System.out.printf(
-                "\nlisten on %s waiting for client...",
-                serverSocket.getLocalSocketAddress()
+            "\nlisten on %s waiting for client...",
+            serverSocket.getLocalSocketAddress()
         );
         startCore(serverSocket);
     }

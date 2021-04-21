@@ -26,6 +26,7 @@ public abstract class AbstractNettyEchoServer extends EchoServerHandler {
             bootstrap.group(master, worker)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG, 64)
+                .option(ChannelOption.SO_REUSEADDR, true)
                 .handler(new LoggingHandler(LogLevel.TRACE))
                 .childHandler(new NettyAcceptHandler());
 

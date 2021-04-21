@@ -31,10 +31,11 @@ public class NIOEchoServer extends EchoServerHandler {
         LogUtil.logCaller();
         final ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         final ServerSocket serverSocket = serverSocketChannel.socket();
+        serverSocket.setReuseAddress(true);
         serverSocket.bind(new InetSocketAddress(port));
         System.out.printf(
-                "\nlisten on %s waiting for client...",
-                serverSocket.getLocalSocketAddress()
+            "\nlisten on %s waiting for client...",
+            serverSocket.getLocalSocketAddress()
         );
         serverSocketChannel.configureBlocking(false);
         return serverSocketChannel;
@@ -66,8 +67,8 @@ public class NIOEchoServer extends EchoServerHandler {
     }
 
     private void registerReadChannel(
-            final SocketChannel socketChannel,
-            final Selector selector
+        final SocketChannel socketChannel,
+        final Selector selector
     ) throws IOException {
         socketChannel.configureBlocking(false);
         socketChannel.register(selector, SelectionKey.OP_READ);
@@ -76,13 +77,13 @@ public class NIOEchoServer extends EchoServerHandler {
     }
 
     private int readAndWrite(
-            final SocketChannel socketChannel,
-            final ByteBuffer buf
+        final SocketChannel socketChannel,
+        final ByteBuffer buf
     ) throws IOException {
         long pid = Thread.currentThread().getId();
         buf.clear();
         int readSize = socketChannel.read(buf);
-        if (readSize==-1) {
+        if (readSize == -1) {
             System.out.printf("\npid=%d read form client : FIN\n", pid);
             return readSize;
         }

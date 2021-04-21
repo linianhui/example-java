@@ -2,6 +2,7 @@ package network.aio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.StandardSocketOptions;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.util.concurrent.CountDownLatch;
 
@@ -24,9 +25,10 @@ public class AIOEchoServer extends EchoServerHandler {
         final AsynchronousServerSocketChannel asynchronousServerSocketChannel = AsynchronousServerSocketChannel.open();
         final InetSocketAddress socketAddress = new InetSocketAddress(port);
         asynchronousServerSocketChannel.bind(socketAddress);
+        asynchronousServerSocketChannel.setOption(StandardSocketOptions.SO_REUSEADDR, true);
         System.out.printf(
-                "\nlisten on %s waiting for client...",
-                socketAddress
+            "\nlisten on %s waiting for client...",
+            socketAddress
         );
         return asynchronousServerSocketChannel;
     }
