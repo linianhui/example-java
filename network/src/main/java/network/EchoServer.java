@@ -7,6 +7,7 @@ import network.aio.AIOEchoServer;
 import network.bio.BIOEchoServer;
 import network.bio.BIOThreadEchoServer;
 import network.bio.BIOThreadPoolEchoServer;
+import network.netty.NettyEchoServer;
 import network.nio.NIOEchoServer;
 
 public class EchoServer {
@@ -18,7 +19,7 @@ public class EchoServer {
         map.put(ServerModel.BIO_THREAD_POOL, BIOThreadPoolEchoServer::new);
         map.put(ServerModel.NIO, NIOEchoServer::new);
         map.put(ServerModel.AIO, AIOEchoServer::new);
-        map.put(ServerModel.NETTY, NIOEchoServer::new);
+        map.put(ServerModel.NETTY, NettyEchoServer::new);
     }
 
     public static void main(String[] args) {

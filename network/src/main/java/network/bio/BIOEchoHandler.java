@@ -7,6 +7,8 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.charset.StandardCharsets;
 
+import network.util.LogUtil;
+
 public class BIOEchoHandler implements Runnable {
 
     private final Socket socket;
@@ -35,6 +37,7 @@ public class BIOEchoHandler implements Runnable {
     }
 
     protected int readAndWrite(Socket socket) throws IOException {
+        LogUtil.logCaller();
         final InputStream in = socket.getInputStream();
         final byte[] buf = new byte[256];
         long pid = Thread.currentThread().getId();

@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import network.EchoServerHandler;
+import network.util.LogUtil;
 
 public class NIOEchoServer extends EchoServerHandler {
 
@@ -27,6 +28,7 @@ public class NIOEchoServer extends EchoServerHandler {
     }
 
     private ServerSocketChannel bind(int port) throws IOException {
+        LogUtil.logCaller();
         final ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         final ServerSocket serverSocket = serverSocketChannel.socket();
         serverSocket.bind(new InetSocketAddress(port));

@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import network.EchoServerHandler;
+import network.util.LogUtil;
 
 public class BIOEchoServer extends EchoServerHandler {
 
@@ -14,6 +15,7 @@ public class BIOEchoServer extends EchoServerHandler {
 
     @Override
     protected void startCore(int port) throws IOException {
+        LogUtil.logCaller();
         final ServerSocket serverSocket = new ServerSocket(port);
         System.out.printf(
                 "\nlisten on %s waiting for client...",

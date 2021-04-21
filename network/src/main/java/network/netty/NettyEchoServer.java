@@ -1,6 +1,5 @@
 package network.netty;
 
-import network.EchoServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -9,6 +8,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import network.EchoServerHandler;
+import network.util.LogUtil;
 
 public class NettyEchoServer extends EchoServerHandler {
 
@@ -18,6 +19,7 @@ public class NettyEchoServer extends EchoServerHandler {
 
     @Override
     protected void startCore(int port) throws InterruptedException {
+        LogUtil.logCaller();
         final EventLoopGroup master = new NioEventLoopGroup(1);
         final EventLoopGroup worker = new NioEventLoopGroup(4);
         try {

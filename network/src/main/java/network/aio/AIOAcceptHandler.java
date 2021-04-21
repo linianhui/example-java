@@ -12,6 +12,7 @@ public class AIOAcceptHandler implements CompletionHandler<AsynchronousSocketCha
 
     @Override
     public void completed(AsynchronousSocketChannel channel, AIOEchoServer aioEchoServer) {
+        LogUtil.logCaller();
         try {
             SocketAddress clientAddress = channel.getRemoteAddress();
             System.out.printf("\naccept client %s", clientAddress);

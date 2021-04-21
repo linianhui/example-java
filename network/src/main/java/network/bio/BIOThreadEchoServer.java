@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import network.util.LogUtil;
+
 public class BIOThreadEchoServer extends BIOEchoServer {
 
     public BIOThreadEchoServer(int port) {
@@ -12,6 +14,7 @@ public class BIOThreadEchoServer extends BIOEchoServer {
 
     @Override
     public void startCore(final ServerSocket serverSocket) throws IOException {
+        LogUtil.logCaller();
         while (true) {
             final Socket socket = serverSocket.accept();
             final Thread thread = new Thread(

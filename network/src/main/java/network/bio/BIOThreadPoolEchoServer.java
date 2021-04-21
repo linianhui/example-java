@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import network.util.LogUtil;
+
 public class BIOThreadPoolEchoServer extends BIOEchoServer {
 
     public BIOThreadPoolEchoServer(int port) {
@@ -16,7 +18,8 @@ public class BIOThreadPoolEchoServer extends BIOEchoServer {
 
     @Override
     public void startCore(final ServerSocket serverSocket) throws IOException {
-        ExecutorService executor = new ThreadPoolExecutor(
+        LogUtil.logCaller();
+        final ExecutorService executor = new ThreadPoolExecutor(
             2,
             8,
             10, TimeUnit.MINUTES,

@@ -6,6 +6,7 @@ import java.nio.channels.AsynchronousServerSocketChannel;
 import java.util.concurrent.CountDownLatch;
 
 import network.EchoServerHandler;
+import network.util.LogUtil;
 
 public class AIOEchoServer extends EchoServerHandler {
 
@@ -15,6 +16,7 @@ public class AIOEchoServer extends EchoServerHandler {
 
     @Override
     protected void startCore(int port) throws IOException {
+        LogUtil.logCaller();
         startCore(bind(port));
     }
 

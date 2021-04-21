@@ -18,6 +18,7 @@ public class AIOEchoHandler implements CompletionHandler<Integer, ByteBuffer> {
 
     @Override
     public void completed(Integer readSize, ByteBuffer buf) {
+        LogUtil.logCaller();
         long pid = Thread.currentThread().getId();
         if (readSize==-1) {
             System.out.printf("\npid=%d read form client : FIN\n", pid);
