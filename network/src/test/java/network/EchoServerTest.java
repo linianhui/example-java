@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -39,7 +38,6 @@ public class EchoServerTest extends AbstractTest {
     }
 
     @Test
-    @Disabled
     void test_netty_bio_server_is_ok() throws IOException {
         test_server(ServerModel.NETTY_BIO);
     }
