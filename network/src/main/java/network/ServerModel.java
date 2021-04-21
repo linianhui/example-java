@@ -6,5 +6,8 @@ public enum ServerModel {
     BIO_THREAD_POOL,
     NIO,
     AIO,
-    NETTY
+    NETTY_BIO,
+    NETTY_NIO,
+    NETTY_EPOLL,
+    NETTY_KQUEUE
 }

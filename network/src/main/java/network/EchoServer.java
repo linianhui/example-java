@@ -7,7 +7,10 @@ import network.aio.AIOEchoServer;
 import network.bio.BIOEchoServer;
 import network.bio.BIOThreadEchoServer;
 import network.bio.BIOThreadPoolEchoServer;
-import network.netty.NettyEchoServer;
+import network.netty.BIONettyEchoServer;
+import network.netty.EpollNettyEchoServer;
+import network.netty.KQueueNettyEchoServer;
+import network.netty.NIONettyEchoServer;
 import network.nio.NIOEchoServer;
 
 public class EchoServer {
@@ -19,7 +22,10 @@ public class EchoServer {
         map.put(ServerModel.BIO_THREAD_POOL, BIOThreadPoolEchoServer::new);
         map.put(ServerModel.NIO, NIOEchoServer::new);
         map.put(ServerModel.AIO, AIOEchoServer::new);
-        map.put(ServerModel.NETTY, NettyEchoServer::new);
+        map.put(ServerModel.NETTY_BIO, BIONettyEchoServer::new);
+        map.put(ServerModel.NETTY_NIO, NIONettyEchoServer::new);
+        map.put(ServerModel.NETTY_EPOLL, EpollNettyEchoServer::new);
+        map.put(ServerModel.NETTY_KQUEUE, KQueueNettyEchoServer::new);
     }
 
     public static void main(String[] args) {

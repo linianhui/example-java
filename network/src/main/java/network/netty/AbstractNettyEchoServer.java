@@ -4,36 +4,35 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import network.EchoServerHandler;
 import network.util.LogUtil;
 
-public class NettyEchoServer extends EchoServerHandler {
+public abstract class AbstractNettyEchoServer extends EchoServerHandler {
 
-    public NettyEchoServer(int port) {
+    public AbstractNettyEchoServer(int port) {
         super(port);
     }
 
     @Override
     protected void startCore(int port) throws InterruptedException {
         LogUtil.logCaller();
-        final EventLoopGroup master = new NioEventLoopGroup(1);
-        final EventLoopGroup worker = new NioEventLoopGroup(4);
+        final EventLoopGroup master = buildEventLoopGroup(1);
+        final EventLoopGroup worker = buildEventLoopGroup(4);
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(master, worker)
-                    .channel(NioServerSocketChannel.class)
-                    .option(ChannelOption.SO_BACKLOG, 64)
-                    .handler(new LoggingHandler(LogLevel.TRACE))
-                    .childHandler(new NettyAcceptHandler());
+                .channel(NioServerSocketChannel.class)
+                .option(ChannelOption.SO_BACKLOG, 64)
+                .handler(new LoggingHandler(LogLevel.TRACE))
+                .childHandler(new NettyAcceptHandler());
 
             ChannelFuture future = bootstrap.bind(port).sync();
             System.out.printf(
-                    "\nlisten on %s waiting for client...",
-                    future.channel().localAddress()
+                "\nlisten on %s waiting for client...",
+                future.channel().localAddress()
             );
             future.channel().closeFuture().sync();
         } finally {
@@ -41,4 +40,8 @@ public class NettyEchoServer extends EchoServerHandler {
             worker.shutdownGracefully();
         }
     }
+
+    protected abstract EventLoopGroup buildEventLoopGroup(int nThreads);
+
+    protected abstract Class<?> buildChannel();
 }
