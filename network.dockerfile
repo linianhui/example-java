@@ -16,6 +16,6 @@ COPY --from=builder /build/network/target/network-1.0-jar-with-dependencies.jar 
 
 ENV JAVA_OPTIONS='-XX:+UseG1GC -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.00'
 
-ENTRYPOINT ["/bin/bash", "-c", "java $JAVA_OPTIONS -jar app.jar"]
+ENTRYPOINT ["/bin/bash", "-c", "java $JAVA_OPTIONS $JAVA_DEBUG_OPTIONS -jar app.jar"]
 
-EXPOSE 12345
+EXPOSE 12345 5005
