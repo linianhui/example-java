@@ -1,45 +1,35 @@
 package network;
 
+import java.util.HashMap;
+import java.util.function.Function;
+
 import network.aio.AIOEchoServer;
 import network.bio.BIOEchoServer;
 import network.bio.BIOThreadEchoServer;
 import network.bio.BIOThreadPoolEchoServer;
-import network.netty.NettyEchoServer;
 import network.nio.NIOEchoServer;
 
 public class EchoServer {
+    private final static HashMap<ServerModel, Function<Integer, EchoServerHandler>> map = new HashMap<>();
+
+    static {
+        map.put(ServerModel.BIO, BIOEchoServer::new);
+        map.put(ServerModel.BIO_THREAD, BIOThreadEchoServer::new);
+        map.put(ServerModel.BIO_THREAD_POOL, BIOThreadPoolEchoServer::new);
+        map.put(ServerModel.NIO, NIOEchoServer::new);
+        map.put(ServerModel.AIO, AIOEchoServer::new);
+        map.put(ServerModel.NETTY, NIOEchoServer::new);
+    }
+
     public static void main(String[] args) {
-        String type = "bio";
+        ServerModel model = ServerModel.BIO;
         int port = 12345;
         if (args.length >= 1) {
-            type = args[0];
+            model = ServerModel.valueOf(args[0]);
         }
         if (args.length >= 2) {
             port = Integer.parseInt(args[1]);
         }
-
-        create(type, port).start();
-    }
-
-    private static EchoServerHandler create(
-            final String type,
-            final int port
-    ) {
-        switch (type) {
-            case "bio":
-                return new BIOEchoServer(port);
-            case "bio-thread":
-                return new BIOThreadEchoServer(port);
-            case "bio-thread-pool":
-                return new BIOThreadPoolEchoServer(port);
-            case "nio":
-                return new NIOEchoServer(port);
-            case "aio":
-                return new AIOEchoServer(port);
-            case "netty":
-                return new NettyEchoServer(port);
-            default:
-                return null;
-        }
+        map.get(model).apply(port).start();
     }
 }

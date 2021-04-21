@@ -7,21 +7,14 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.EnumSource;
 
 public class EchoServerTest extends AbstractTest {
 
     @ParameterizedTest()
-    @ValueSource(strings = {
-            "bio",
-            "bio-thread",
-            "bio-thread-pool",
-            "nio",
-            "aio",
-            "netty"
-    })
-    void test_server_is_ok(String type) throws IOException {
-        int port = start_server(type);
+    @EnumSource(value = ServerModel.class)
+    void test_server_is_ok(ServerModel model) throws IOException {
+        int port = startServer(model);
 
         final Socket socket = connect(port);
 

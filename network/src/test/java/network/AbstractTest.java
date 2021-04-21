@@ -6,13 +6,13 @@ import java.net.Socket;
 import java.util.Random;
 
 abstract class AbstractTest {
-    protected int start_server(String type) {
+    protected int startServer(ServerModel model) {
         int port = getRandomUnusedPort();
-        System.out.printf("\n\n%s server port is %d", type, port);
+        System.out.printf("\n\n%s server port is %d", model.name(), port);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                EchoServer.main(new String[]{type, String.valueOf(port)});
+                EchoServer.main(new String[]{model.name(), String.valueOf(port)});
             }
         });
         thread.start();
