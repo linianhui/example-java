@@ -1,6 +1,7 @@
 package network.netty;
 
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.ServerChannel;
 import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.epoll.EpollServerSocketChannel;
 
@@ -16,7 +17,7 @@ public class EpollNettyEchoServer extends AbstractNettyEchoServer {
     }
 
     @Override
-    protected Class<?> buildChannel() {
+    protected Class<? extends ServerChannel> buildChannel() {
         return EpollServerSocketChannel.class;
     }
 }

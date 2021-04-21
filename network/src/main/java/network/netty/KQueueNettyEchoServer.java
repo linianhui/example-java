@@ -1,6 +1,7 @@
 package network.netty;
 
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.ServerChannel;
 import io.netty.channel.kqueue.KQueueEventLoopGroup;
 import io.netty.channel.kqueue.KQueueServerSocketChannel;
 
@@ -16,7 +17,7 @@ public class KQueueNettyEchoServer extends AbstractNettyEchoServer {
     }
 
     @Override
-    protected Class<?> buildChannel() {
+    protected Class<? extends ServerChannel> buildChannel() {
         return KQueueServerSocketChannel.class;
     }
 }

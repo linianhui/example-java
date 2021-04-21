@@ -1,6 +1,7 @@
 package network.netty;
 
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.ServerChannel;
 import io.netty.channel.oio.OioEventLoopGroup;
 import io.netty.channel.socket.oio.OioServerSocketChannel;
 
@@ -16,7 +17,7 @@ public class BIONettyEchoServer extends AbstractNettyEchoServer {
     }
 
     @Override
-    protected Class<?> buildChannel() {
+    protected Class<? extends ServerChannel> buildChannel() {
         return OioServerSocketChannel.class;
     }
 }

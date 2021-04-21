@@ -4,7 +4,7 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.ServerChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import network.EchoServerHandler;
@@ -24,7 +24,7 @@ public abstract class AbstractNettyEchoServer extends EchoServerHandler {
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(master, worker)
-                .channel(NioServerSocketChannel.class)
+                .channel(buildChannel())
                 .option(ChannelOption.SO_BACKLOG, 64)
                 .option(ChannelOption.SO_REUSEADDR, true)
                 .handler(new LoggingHandler(LogLevel.TRACE))
@@ -44,5 +44,5 @@ public abstract class AbstractNettyEchoServer extends EchoServerHandler {
 
     protected abstract EventLoopGroup buildEventLoopGroup(int nThreads);
 
-    protected abstract Class<?> buildChannel();
+    protected abstract Class<? extends ServerChannel> buildChannel();
 }
