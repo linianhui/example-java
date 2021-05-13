@@ -1,4 +1,4 @@
-package mysqlexample.mapper;
+package mysqlexample.ddlmapper;
 
 import java.util.List;
 import java.util.Map;
