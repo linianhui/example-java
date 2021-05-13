@@ -15,7 +15,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         LogUtil.logArgs(args);
         final SqlSessionFactory sqlSessionFactory = MyBatisUtil.buildSqlSessionFactory();
-        try (SqlSession session = sqlSessionFactory.openSession()) {
+        try (SqlSession session = sqlSessionFactory.openSession(true)) {
             final DDLBlogMapper ddlBlogMapper = session.getMapper(DDLBlogMapper.class);
             createTableIfNotExists(ddlBlogMapper);
             getTableInformation(ddlBlogMapper);
