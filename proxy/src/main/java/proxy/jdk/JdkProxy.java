@@ -7,6 +7,9 @@ import proxy.TestInterface;
 import proxy.TestInterfaceImpl;
 
 public class JdkProxy {
+    /**
+     * arthas : jad com.sun.proxy.$Proxy0
+     **/
     public static TestInterface proxyTestInterface() {
         final InvocationHandler handler = new InvocationHandlerImpl(
                 new TestInterfaceImpl()

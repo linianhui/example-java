@@ -13,6 +13,11 @@ public class InvocationHandlerImpl implements InvocationHandler {
         this.target = target;
     }
 
+    /**
+     * > 15 优化
+     * arthas : jad jdk.internal.reflect.GeneratedMethodAccessor1
+     * @link{NativeMethodAccessorImpl#invoke}
+    **/
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         LogUtil.logArgs(proxy.getClass(), method, args);
