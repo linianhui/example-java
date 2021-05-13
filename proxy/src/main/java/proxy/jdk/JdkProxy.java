@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
 import proxy.TestInterface;
+import proxy.TestInterfaceImpl;
 
 public class JdkProxy {
     public static TestInterface proxyTestInterface() {

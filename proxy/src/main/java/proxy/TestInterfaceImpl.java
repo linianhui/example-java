@@ -1,6 +1,4 @@
-package proxy.jdk;
-
-import proxy.TestInterface;
+package proxy;
 
 public class TestInterfaceImpl implements TestInterface {
     @Override
