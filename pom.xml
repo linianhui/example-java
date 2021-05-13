@@ -9,6 +9,7 @@
   <modules>
     <module>example</module>
     <module>network</module>
+    <module>mysql</module>
   </modules>
 
   <properties>
