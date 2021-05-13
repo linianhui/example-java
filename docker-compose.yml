@@ -26,6 +26,13 @@ services:
     volumes:
       - volume_admin-mysql:/sessions
 
+  mysqlexample.app:
+    build:
+      context: .
+      dockerfile: mysqlexample.dockerfile
+    depends_on:
+      - mysql.test
+
 volumes:
   volume_mysql:
   volume_admin-mysql:
