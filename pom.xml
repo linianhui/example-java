@@ -10,6 +10,7 @@
     <module>example</module>
     <module>network</module>
     <module>mysql</module>
+    <module>proxy</module>
   </modules>
 
   <properties>
