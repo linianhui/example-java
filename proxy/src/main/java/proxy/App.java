@@ -5,10 +5,10 @@ import proxy.jdk.JdkProxy;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        final TestInterface jdkProxyTestInterface = JdkProxy.proxyTestInterface();
+        final TestInterface jdkProxyTestInterface = JdkProxy.proxy(new TestInterfaceImpl());
         jdkProxyTestInterface.hello();
 
-        final TestInterface cglibProxyTestInterface = CGLibProxy.proxyTestInterface();
-        cglibProxyTestInterface.hello();
+        final TestInterfaceImpl cglibProxyTestInterfaceImpl = CGLibProxy.proxy(TestInterfaceImpl.class);
+        cglibProxyTestInterfaceImpl.hello();
     }
 }
