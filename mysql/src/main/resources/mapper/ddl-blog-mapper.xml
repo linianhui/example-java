@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mysqlexample.ddlmapper.DDLBlogMapper">
   <update id="createTableIfNotExists">
-    CREATE TABLE If Not Exists test.blog (
+    CREATE TABLE If Not Exists blog (
     id int NOT NULL AUTO_INCREMENT,
     title varchar(256) NOT NULL,
     PRIMARY KEY (id)

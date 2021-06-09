@@ -9,8 +9,12 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MyBatisUtil {
     public static SqlSessionFactory buildSqlSessionFactory() throws IOException {
+        return buildSqlSessionFactory("dev");
+    }
+
+    public static SqlSessionFactory buildSqlSessionFactory(String environment) throws IOException {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
-        return new SqlSessionFactoryBuilder().build(inputStream);
+        return new SqlSessionFactoryBuilder().build(inputStream, environment);
     }
 }
