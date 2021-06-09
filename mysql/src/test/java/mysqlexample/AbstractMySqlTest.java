@@ -17,7 +17,7 @@ public abstract class AbstractMySqlTest {
 
     @BeforeAll
     static void beforeAll() throws IOException {
-        sqlSessionFactory = MyBatisUtil.buildSqlSessionFactory("test");
+        sqlSessionFactory = MyBatisUtil.buildSqlSessionFactory();
     }
 
     @BeforeEach
