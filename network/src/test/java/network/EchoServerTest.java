@@ -68,7 +68,7 @@ public class EchoServerTest extends AbstractTest {
     }
 
     private void assertWriteAndRead(Socket socket) throws IOException {
-        String inputString = UUID.randomUUID().toString();
+        String inputString = UUID.randomUUID().toString().toLowerCase();
 
         String actual = writeAndRead(socket, inputString);
 
