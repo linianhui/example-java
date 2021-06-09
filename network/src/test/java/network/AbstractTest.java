@@ -3,9 +3,14 @@ package network;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 abstract class AbstractTest {
+
+    private static final Set<Integer> USED_PORT = new HashSet<>();
+
     protected int startServer(ServerModel model) {
         int port = getRandomUnusedPort();
         System.out.printf("\n\n%s server port is %d", model.name(), port);
@@ -23,7 +28,6 @@ abstract class AbstractTest {
         int port = new Random().nextInt(10000) + 50000;
         while (true) {
             if (portIsUnused(port)) {
-
                 return port;
             } else {
                 port = new Random().nextInt(10000) + 50000;
@@ -32,10 +36,14 @@ abstract class AbstractTest {
     }
 
     private boolean portIsUnused(int port) {
+        if (USED_PORT.contains(port)){
+            return false;
+        }
         try {
             new Socket(InetAddress.getLoopbackAddress(), port);
             return false;
         } catch (IOException e) {
+            USED_PORT.add(port);
             return true;
         }
     }
