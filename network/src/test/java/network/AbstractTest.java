@@ -25,12 +25,12 @@ abstract class AbstractTest {
     }
 
     protected int getRandomUnusedPort() {
-        int port = new Random().nextInt(10000) + 50000;
+        int port = new Random().nextInt(10000) + 20000;
         while (true) {
             if (portIsUnused(port)) {
                 return port;
             } else {
-                port = new Random().nextInt(10000) + 50000;
+                port = new Random().nextInt(10000) + 20000;
             }
         }
     }
