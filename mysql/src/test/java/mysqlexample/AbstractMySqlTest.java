@@ -2,11 +2,13 @@ package mysqlexample;
 
 import java.io.IOException;
 
+import com.zaxxer.hikari.HikariDataSource;
 import mysqlexample.ddlmapper.DDLBlogMapper;
 import mysqlexample.util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -18,6 +20,11 @@ public abstract class AbstractMySqlTest {
     @BeforeAll
     static void beforeAll() throws IOException {
         sqlSessionFactory = MyBatisUtil.buildSqlSessionFactory();
+        HikariDataSource dataSource = (HikariDataSource) sqlSessionFactory
+                .getConfiguration()
+                .getEnvironment()
+                .getDataSource();
+        Assertions.assertTrue(dataSource.getJdbcUrl().startsWith("jdbc:h2:mem"));
     }
 
     @BeforeEach
@@ -31,7 +38,7 @@ public abstract class AbstractMySqlTest {
 
     @AfterEach
     void afterEach() {
-        if (sqlSession != null) {
+        if (sqlSession!=null) {
             sqlSession.close();
         }
     }
