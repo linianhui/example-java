@@ -14,52 +14,52 @@ public class EchoServerTest extends AbstractTest {
 
     @Test
     void test_bio_server_is_ok() throws IOException {
-        test_server(ServerModel.BIO);
+        test_server(IOModel.BIO);
     }
 
     @Test
     void test_bio_thread_server_is_ok() throws IOException {
-        test_server(ServerModel.BIO_THREAD);
+        test_server(IOModel.BIO_THREAD);
     }
 
     @Test
     void test_bio_thread_pool_server_is_ok() throws IOException {
-        test_server(ServerModel.BIO_THREAD_POOL);
+        test_server(IOModel.BIO_THREAD_POOL);
     }
 
     @Test
     void test_nio_server_is_ok() throws IOException {
-        test_server(ServerModel.NIO);
+        test_server(IOModel.NIO);
     }
 
     @Test
     void test_aio_server_is_ok() throws IOException {
-        test_server(ServerModel.AIO);
+        test_server(IOModel.AIO);
     }
 
     @Test
     void test_netty_bio_server_is_ok() throws IOException {
-        test_server(ServerModel.NETTY_BIO);
+        test_server(IOModel.NETTY_BIO);
     }
 
     @Test
     void test_netty_nio_server_is_ok() throws IOException {
-        test_server(ServerModel.NETTY_NIO);
+        test_server(IOModel.NETTY_NIO);
     }
 
     @Test
     @EnabledOnOs(OS.LINUX)
     void test_netty_epoll_server_is_ok() throws IOException {
-        test_server(ServerModel.NETTY_EPOLL);
+        test_server(IOModel.NETTY_EPOLL);
     }
 
     @Test
     @EnabledOnOs(OS.MAC)
     void test_netty_kqueue_server_is_ok() throws IOException {
-        test_server(ServerModel.NETTY_KQUEUE);
+        test_server(IOModel.NETTY_KQUEUE);
     }
 
-    void test_server(ServerModel model) throws IOException {
+    void test_server(IOModel model) throws IOException {
         int port = startServer(model);
 
         final Socket socket = connect(port);
