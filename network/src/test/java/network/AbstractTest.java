@@ -11,7 +11,7 @@ abstract class AbstractTest {
 
     private static final Set<Integer> USED_PORT = new HashSet<>();
 
-    protected int startServer(ServerModel model) {
+    protected int startServer(IOModel model) {
         int port = getRandomUnusedPort();
         System.out.printf("\n\n%s server port is %d", model.name(), port);
         Thread thread = new Thread(new Runnable() {

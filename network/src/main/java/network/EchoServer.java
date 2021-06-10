@@ -14,30 +14,30 @@ import network.netty.NIONettyEchoServer;
 import network.nio.NIOEchoServer;
 
 public class EchoServer {
-    private final static HashMap<ServerModel, Function<Integer, EchoServerHandler>> map = new HashMap<>();
+    private final static HashMap<IOModel, Function<Integer, EchoServerHandler>> MAP = new HashMap<>();
 
     static {
-        map.put(ServerModel.BIO, BIOEchoServer::new);
-        map.put(ServerModel.BIO_THREAD, BIOThreadEchoServer::new);
-        map.put(ServerModel.BIO_THREAD_POOL, BIOThreadPoolEchoServer::new);
-        map.put(ServerModel.NIO, NIOEchoServer::new);
-        map.put(ServerModel.AIO, AIOEchoServer::new);
-        map.put(ServerModel.NETTY_BIO, BIONettyEchoServer::new);
-        map.put(ServerModel.NETTY_NIO, NIONettyEchoServer::new);
-        map.put(ServerModel.NETTY_EPOLL, EpollNettyEchoServer::new);
-        map.put(ServerModel.NETTY_KQUEUE, KQueueNettyEchoServer::new);
+        MAP.put(IOModel.BIO, BIOEchoServer::new);
+        MAP.put(IOModel.BIO_THREAD, BIOThreadEchoServer::new);
+        MAP.put(IOModel.BIO_THREAD_POOL, BIOThreadPoolEchoServer::new);
+        MAP.put(IOModel.NIO, NIOEchoServer::new);
+        MAP.put(IOModel.AIO, AIOEchoServer::new);
+        MAP.put(IOModel.NETTY_BIO, BIONettyEchoServer::new);
+        MAP.put(IOModel.NETTY_NIO, NIONettyEchoServer::new);
+        MAP.put(IOModel.NETTY_EPOLL, EpollNettyEchoServer::new);
+        MAP.put(IOModel.NETTY_KQUEUE, KQueueNettyEchoServer::new);
     }
 
     public static void main(String[] args) {
         System.out.printf("\nargs [%s]\n", String.join(",", args));
-        ServerModel model = ServerModel.BIO;
+        IOModel model = IOModel.BIO;
         int port = 12345;
         if (args.length >= 1) {
-            model = ServerModel.valueOf(args[0]);
+            model = IOModel.valueOf(args[0]);
         }
         if (args.length >= 2) {
             port = Integer.parseInt(args[1]);
         }
-        map.get(model).apply(port).start();
+        MAP.get(model).apply(port).start();
     }
 }

@@ -1,6 +1,6 @@
 package network;
 
-public enum ServerModel {
+public enum IOModel {
     BIO,
     BIO_THREAD,
     BIO_THREAD_POOL,
