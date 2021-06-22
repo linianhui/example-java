@@ -7,10 +7,10 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.ServerChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import network.EchoServerHandler;
+import network.EchoServer;
 import network.util.LogUtil;
 
-public abstract class AbstractNettyEchoServer extends EchoServerHandler {
+public abstract class AbstractNettyEchoServer extends EchoServer {
 
     public AbstractNettyEchoServer(int port) {
         super(port);

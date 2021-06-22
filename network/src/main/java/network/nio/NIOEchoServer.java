@@ -13,10 +13,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 
-import network.EchoServerHandler;
+import network.EchoServer;
 import network.util.LogUtil;
 
-public class NIOEchoServer extends EchoServerHandler {
+public class NIOEchoServer extends EchoServer {
 
     public NIOEchoServer(int port) {
         super(port);

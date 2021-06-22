@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import network.EchoServerHandler;
+import network.EchoServer;
 import network.util.LogUtil;
 
-public class BIOEchoServer extends EchoServerHandler {
+public class BIOEchoServer extends EchoServer {
 
     public BIOEchoServer(int port) {
         super(port);

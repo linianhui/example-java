@@ -17,7 +17,7 @@ abstract class AbstractTest {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                EchoServer.main(new String[]{model.name(), String.valueOf(port)});
+                App.main(new String[]{model.name(), String.valueOf(port)});
             }
         });
         thread.start();

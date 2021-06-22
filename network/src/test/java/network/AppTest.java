@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
-public class EchoServerTest extends AbstractTest {
+public class AppTest extends AbstractTest {
 
     @Test
     void test_bio_server_is_ok() throws IOException {

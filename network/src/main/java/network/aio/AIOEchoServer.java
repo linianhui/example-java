@@ -5,10 +5,10 @@ import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.util.concurrent.CountDownLatch;
 
-import network.EchoServerHandler;
+import network.EchoServer;
 import network.util.LogUtil;
 
-public class AIOEchoServer extends EchoServerHandler {
+public class AIOEchoServer extends EchoServer {
 
     public AIOEchoServer(int port) {
         super(port);
