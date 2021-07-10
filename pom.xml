@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.github.linianhui.java</groupId>
-  <artifactId>pom</artifactId>
+  <artifactId>parent</artifactId>
   <packaging>pom</packaging>
   <version>1.0</version>
   <modules>
