@@ -2,10 +2,10 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.github.linianhui.java</groupId>
+  <groupId>io.github.linianhui.example.java</groupId>
   <artifactId>parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0</version>
+  <version>${revison}</version>
   <modules>
     <module>example</module>
     <module>network</module>
@@ -18,39 +18,83 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <revison>1.0</revison>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.30</version>
+      </dependency>
+      <dependency>
+        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.2.3</version>
+      </dependency>
+      <dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit/junit-bom -->
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
         <version>5.7.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+        <groupId>cglib</groupId>
+        <artifactId>cglib</artifactId>
+        <version>3.3.0</version>
+      </dependency>
+      <dependency>
+        <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm</artifactId>
+        <version>9.1</version>
+      </dependency>
+      <dependency>
+        <!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
+        <groupId>org.javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>3.28.0-GA</version>
+      </dependency>
+      <dependency>
+        <!-- https://mvnrepository.com/artifact/io.netty/netty-bom -->
+        <groupId>io.netty</groupId>
+        <artifactId>netty-bom</artifactId>
+        <version>4.1.68.Final</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.25</version>
+      </dependency>
+      <dependency>
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>3.5.7</version>
+      </dependency>
+      <dependency>
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>1.4.200</version>
+      </dependency>
+      <dependency>
+        <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>4.0.3</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.30</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 
   <build>
     <plugins>
