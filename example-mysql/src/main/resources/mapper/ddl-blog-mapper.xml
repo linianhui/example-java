@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="example.mysql.ddl.mapper.DDLBlogMapper">
+  <update id="createTableIfNotExists">
+    CREATE TABLE If Not Exists blog (
+    id int NOT NULL AUTO_INCREMENT,
+    title varchar(256) NOT NULL,
+    PRIMARY KEY (id)
+    )
+  </update>
+
+  <select id="getTableInformation" resultType="java.util.HashMap">
+    SELECT *
+    FROM information_schema.TABLES
+    WHERE TABLE_NAME='blog'
+  </select>
+</mapper>

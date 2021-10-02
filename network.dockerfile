@@ -5,14 +5,14 @@ WORKDIR /build
 
 COPY . .
 
-RUN mvn package --projects network
+RUN mvn package --projects networking
 
 
 FROM lnhcode/openjdk:11.0.10
 
 WORKDIR /app
 
-COPY --from=builder /build/network/target/network-1.0-jar-with-dependencies.jar app.jar
+COPY --from=builder /build/networking/target/networking-1.0-jar-with-dependencies.jar app.jar
 
 ENV JAVA_OPTIONS='-XX:+UseG1GC -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.00'
 
