@@ -23,7 +23,7 @@ class FutureTest {
     @Test
     void test_future_with_runnable_when_timeout() {
         final ExecutorService executor = Executors.newSingleThreadExecutor();
-        final Future<String> future = executor.submit(sleepRunnable(20), "result-abc");
+        final Future<String> future = executor.submit(sleepRunnable(200), "result-abc");
 
         assertFalse(future.isCancelled());
         assertFalse(future.isDone());
@@ -50,7 +50,7 @@ class FutureTest {
     @Test
     void test_future_with_callable_when_timeout() {
         final ExecutorService executor = Executors.newSingleThreadExecutor();
-        final Future<String> future = executor.submit(sleepCallable(10));
+        final Future<String> future = executor.submit(sleepCallable(100));
 
         assertFalse(future.isCancelled());
         assertFalse(future.isDone());

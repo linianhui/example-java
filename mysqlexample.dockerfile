@@ -1,5 +1,6 @@
-# https://hub.docker.com/_/maven/
-FROM maven:3.8-jdk-11 AS builder
+# https://github.com/linianhui/docker/pkgs/container/maven
+
+FROM ghcr.io/linianhui/maven:3.8-openjdk-11 AS builder
 
 WORKDIR /build
 
@@ -8,7 +9,7 @@ COPY . .
 RUN mvn package --projects mysql
 
 
-FROM lnhcode/openjdk:11.0.10
+FROM ghcr.io/linianhui/openjdk:8u322
 
 WORKDIR /app
 

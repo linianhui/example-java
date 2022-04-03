@@ -61,7 +61,7 @@ class UnsafeExampleTest {
     void test_filed_offset() {
         Assertions.assertEquals(12, UnsafeExample.instanceVolatileValueFieldOffset);
         Assertions.assertEquals(16, UnsafeExample.instanceValueFieldOffset);
-        Assertions.assertEquals(144, UnsafeExample.staticValueFieldOffset);
+        Assertions.assertEquals(136, UnsafeExample.staticValueFieldOffset);
     }
 
     @Test
