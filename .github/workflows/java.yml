@@ -8,7 +8,7 @@ jobs:
 
     container:
       # https://hub.docker.com/_/maven/
-      image: maven:3.8-openjdk-88
+      image: maven:3.8-openjdk-8
 
     steps:
       - name: git checkout
