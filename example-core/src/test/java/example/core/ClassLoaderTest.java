@@ -2,10 +2,13 @@ package example.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnJre;
+import org.junit.jupiter.api.condition.JRE;
 
 class ClassLoaderTest {
 
     @Test
+    @EnabledOnJre(JRE.JAVA_11)
     void test_parent_ClassLoader() throws ClassNotFoundException {
         // 先委托父类加载器加载。
         ClassLoader appClassLoader = this.getClass().getClassLoader();
