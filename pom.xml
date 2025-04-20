@@ -39,6 +39,7 @@
     <apache.commons-crypto.version>1.2.0</apache.commons-crypto.version>
     <apache.commons-lang3.version>3.17.0</apache.commons-lang3.version>
     <apache.commons-numbers-bom.version>1.2</apache.commons-numbers-bom.version>
+    <okhttp-bom.version>4.12.0</okhttp-bom.version>
   </properties>
   <dependencies>
     <dependency>
@@ -148,6 +149,10 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-numbers-rootfinder</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -263,6 +268,14 @@
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-numbers-bom</artifactId>
         <version>${apache.commons-numbers-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp-bom -->
+      <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp-bom</artifactId>
+        <version>${okhttp-bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
