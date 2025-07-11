@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" status="WARN"
+               xmlns="https://logging.apache.org/xml/ns"
+               xsi:schemaLocation="
+               https://logging.apache.org/xml/ns
+               https://logging.apache.org/xml/ns/log4j-config-2.xsd">
+  <Properties>
+    <Property name="logLayout">[%d{yyyy-MM-dd HH:mm:ss.SSSZ}] %-5level [%t] %C{1.}:%L %X %msg%n</Property>
+  </Properties>
+  <Appenders>
+
+    <Console name="std">
+      <PatternLayout pattern="${logLayout}"/>
+    </Console>
+
+    <RollingRandomAccessFile name="app" fileName="log/app.log" filePattern="log/app.log-%d{yyyy-MM-dd}.%i">
+      <PatternLayout pattern="${logLayout}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+        <SizeBasedTriggeringPolicy size="500MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="10"/>
+    </RollingRandomAccessFile>
+  </Appenders>
+  <Loggers>
+    <Root level="INFO">
+      <AppenderRef ref="std"/>
+      <AppenderRef ref="app"/>
+    </Root>
+    <Logger name="example" level="DEBUG"/>
+  </Loggers>
+</Configuration>

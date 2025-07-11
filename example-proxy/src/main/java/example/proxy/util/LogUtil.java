@@ -3,6 +3,9 @@ package example.proxy.util;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class LogUtil {
     public static void logArgs(Object... args) {
         logCaller("args", args);
@@ -13,7 +16,7 @@ public class LogUtil {
     }
 
     public static void logProxyClass(Object proxyInstance) {
-        if (proxyInstance==null) {
+        if (proxyInstance == null) {
             return;
         }
         final Class<?> proxyClass = proxyInstance.getClass();
@@ -29,11 +32,11 @@ public class LogUtil {
         final Thread thread = Thread.currentThread();
         final StackTraceElement caller = thread.getStackTrace()[3];
         final String argsString = Arrays.stream(args)
-            .map(x -> x==null ? "null":x.toString())
+            .map(x -> x == null ? "null" : x.toString())
             .collect(Collectors.joining(","));
 
-        System.out.printf(
-            "\n[CALL] pid=%d threadName=%s %s#%s %s=[%s]\n",
+        log.info(
+            "[CALL] pid={} threadName={} {}#{} {}=[{}]",
             thread.getId(),
             thread.getName(),
             caller.getClassName(),
